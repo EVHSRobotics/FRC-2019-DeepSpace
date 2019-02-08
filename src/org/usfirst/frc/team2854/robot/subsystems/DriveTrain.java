@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2854.robot.subsystems;
 
 
+import org.usfirst.frc.team2854.robot.PID;
 import org.usfirst.frc.team2854.robot.RobotMap;
 import org.usfirst.frc.team2854.robot.commands.JoystickCommand;
 
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -44,17 +46,23 @@ public class DriveTrain extends Subsystem{
 		rightTalon1 = new TalonSRX(RobotMap.rightTalon1);
 		rightTalon2 = new TalonSRX(RobotMap.rightTalon2);
 		rightTalon3 = new TalonSRX(RobotMap.rightTalon3);
-
-	//	ahrs = new AHRS(SPI.Port.kMXP);
+		
+		
+		leftTalon1.setInverted(true);
+		leftTalon2.setInverted(true);
+		leftTalon3.setInverted(true);
 		
 		leftTalon2.follow(leftTalon1);
-		rightTalon2.follow(rightTalon1);
 		leftTalon3.follow(leftTalon1);
+		//leftTalon2.set(ControlMode.Follower, leftTalon1.getDeviceID());
+		//leftTalon3.set(ControlMode.Follower, leftTalon1.getDeviceID());
+		
+		rightTalon2.follow(rightTalon1);
 		rightTalon3.follow(rightTalon1);
 		
 		
-		leftTalon2.setInverted(true);
-		leftTalon3.setInverted(true);
+		leftTalon1.setSelectedSensorPosition(0, 0, 10); 
+		rightTalon1.setSelectedSensorPosition(0, 0, 10);
 		
 		
 		
@@ -71,10 +79,11 @@ public class DriveTrain extends Subsystem{
 	
 	public void drive(ControlMode mode, double left, double right) {
 		leftTalon1.set(mode, left);
-
 		
-
 		rightTalon1.set(mode, right);
+		
+		SmartDashboard.putNumber("left encoder", leftTalon1.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("rightEncoder", rightTalon1.getSelectedSensorPosition(0));
 	}
 
 	

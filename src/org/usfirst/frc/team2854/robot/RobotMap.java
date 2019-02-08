@@ -24,7 +24,7 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public static int leftTalon1 = 5; // master
+	public static int leftTalon1 = 10; // master
 	public static int leftTalon2 = 2; //inverted
 	public static int leftTalon3 = 7;//inverted
 	public static int rightTalon3 = 3; //4

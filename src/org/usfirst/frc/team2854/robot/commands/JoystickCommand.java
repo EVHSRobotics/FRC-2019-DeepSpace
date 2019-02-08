@@ -8,14 +8,15 @@ import org.usfirst.frc.team2854.robot.subsystems.SubsystemNames;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class JoystickCommand extends Command {
 
-DriveTrain drive;
-	
+	DriveTrain drive;
+	double throttle;
 
 	public JoystickCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -25,41 +26,41 @@ DriveTrain drive;
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+
 		drive = (DriveTrain) (Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
-		
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		
 
-		double turn = -1*OI.joystick2.getRawAxis(0);
+		double turn = -1 * OI.joystick2.getRawAxis(0);
 		turn = Math.abs(turn) < .05 ? 0 : turn;
 		System.out.println("turn: " + turn);
-	/*	if (OI.joystick.getRawButton(3)) {
-			turn /= 2d;
-			
-		}*/
-		double throttle = -1*OI.joystick.getRawAxis(1);
+		
+
+		//throttle = OI.joystick3.getRawAxis(2) - OI.joystick3.getRawAxis(3);
+		throttle = -1 * OI.joystick.getRawAxis(1);
 		throttle = Math.abs(throttle) < .1 ? 0 : throttle;
-		System.out.println("throttle: " + throttle);
 		
-		
-		System.out.println("left: " + sig(throttle - cubeRoot(turn)) + " right: " +   sig(throttle + cubeRoot(turn)));
 		drive.drive(ControlMode.PercentOutput, sig(throttle - cubeRoot(turn)), sig(throttle + cubeRoot(turn)));
+		
+		SmartDashboard.putNumber("left throttle", sig(throttle - cubeRoot(turn)));
+		SmartDashboard.putNumber("right throttle", sig(throttle + cubeRoot(turn)));
+
 	}
-	/*ask how next two methods are calculated*/
+	
 
 	public double cubeRoot(double val) {
-		if(val >= 0) {
-			return Math.pow(val,  3/2d);
+		if (val >= 0) {
+			return Math.pow(val, 3 / 2d);
 		} else {
-			return -Math.pow(-val, 3/2d);
+			return -Math.pow(-val, 3 / 2d);
 		}
 	}
 
 	public double sig(double val) {
-		return 2/(1 + Math.pow(Math.E, -7 * Math.pow(val, 3))) - 1;
+		return 2 / (1 + Math.pow(Math.E, -7 * Math.pow(val, 3))) - 1;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
