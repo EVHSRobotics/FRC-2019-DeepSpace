@@ -7,7 +7,11 @@
 
 package org.usfirst.frc.team2854.robot;
 
+import org.usfirst.frc.team2854.robot.commands.JoystickCommand;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,5 +47,10 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	public static Joystick joystick = new Joystick(0); //throttle
 	public static Joystick joystick2 = new Joystick(1); //turn 
-	public static Joystick joystick3 = new Joystick(2);
+	public static Joystick joystick3 = new Joystick(2); //xbox controllers
+	
+//	public static JoystickButton buttonTurn = new JoystickButton(joystick2, 1);
+	static {
+		
+	}
 }

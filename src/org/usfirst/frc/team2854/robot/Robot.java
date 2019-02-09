@@ -20,6 +20,8 @@ import java.util.HashMap;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2854.robot.subsystems.SubsystemNames;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -125,6 +127,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+//		DriveTrain drive;
+//		drive = (DriveTrain) (Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
+//		
+//		if(OI.buttonTurn.get()) drive.drive(ControlMode.PercentOutput,  -.5, .5);
+//		else drive.drive(ControlMode.PercentOutput, 0, 0);
 	}
 
 	/**

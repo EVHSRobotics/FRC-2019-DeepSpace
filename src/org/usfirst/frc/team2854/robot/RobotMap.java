@@ -24,11 +24,11 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public static int leftTalon1 = 10; // master
-	public static int leftTalon2 = 2; //inverted
+	public static int leftTalon1 = 8; // inverted
+	public static int leftTalon2 = 2; //master inverted
 	public static int leftTalon3 = 7;//inverted
 	public static int rightTalon3 = 3; //4
 	public static int rightTalon2 = 4; //3
-	public static int rightTalon1 = 6; //master
+	public static int rightTalon1 = 6;//master
 
 }

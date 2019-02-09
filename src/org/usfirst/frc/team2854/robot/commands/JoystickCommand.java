@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class JoystickCommand extends Command {
 
 	DriveTrain drive;
-	double throttle;
+	
 
 	public JoystickCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -39,15 +39,17 @@ public class JoystickCommand extends Command {
 		System.out.println("turn: " + turn);
 		
 
-		//throttle = OI.joystick3.getRawAxis(2) - OI.joystick3.getRawAxis(3);
-		throttle = -1 * OI.joystick.getRawAxis(1);
-		throttle = Math.abs(throttle) < .1 ? 0 : throttle;
+		//double throttle = OI.joystick3.getRawAxis(2) - OI.joystick3.getRawAxis(3);
+		double throttle = -1 * OI.joystick.getRawAxis(1);
+//		throttle = Math.abs(throttle) < .1 ? 0 : throttle;
+		drive.drive(ControlMode.PercentOutput, throttle, throttle);
+//		drive.drive(ControlMode.PercentOutput, sig(throttle - cubeRoot(turn)), sig(throttle + cubeRoot(turn)));
 		
-		drive.drive(ControlMode.PercentOutput, sig(throttle - cubeRoot(turn)), sig(throttle + cubeRoot(turn)));
+		SmartDashboard.putNumber("throttle" , throttle);
+//		SmartDashboard.putNumber("left throttle", sig(throttle - cubeRoot(turn)));
+//		SmartDashboard.putNumber("right throttle", sig(throttle + cubeRoot(turn)));
 		
-		SmartDashboard.putNumber("left throttle", sig(throttle - cubeRoot(turn)));
-		SmartDashboard.putNumber("right throttle", sig(throttle + cubeRoot(turn)));
-
+		
 	}
 	
 
